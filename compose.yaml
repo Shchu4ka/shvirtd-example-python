@@ -1,6 +1,7 @@
 version: '3.8'
 
-include: proxy.yaml
+include: 
+  - proxy.yaml
 
 services:
 
@@ -8,10 +9,12 @@ services:
     image: cr.yandex/crpvbn6fua9tpu2t8tn3/python_app:1.0
     restart: always
     environment:
-      - DB_HOST='172.20.0.10'
+      - DB_HOST=db
       - DB_USER=${MYSQL_USER}
       - DB_PASSWORD=${MYSQL_PASSWORD}
       - DB_NAME=${MYSQL_DATABASE}
+    depends_on:
+      - db
     ports:
       - "5000:5000"
     networks:
